@@ -20,7 +20,7 @@ public final class PingConfig {
         this.intervalMinutes = Math.max(1, cfg.getInt("interval-minutes", 5));
         this.serverIdOverride = trim(cfg.getString("server-id", ""));
         this.hostLabelOverride = trim(cfg.getString("host-label", ""));
-        this.prefix = cfg.getString("messages.prefix", "&7");
+        this.prefix = cfg.getString("messages.prefix", "");
         this.pingLine = cfg.getString("messages.ping-line", "&7Ping: &f{ping}ms");
         this.serverLine = cfg.getString(
                 "messages.server-line",

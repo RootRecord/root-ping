@@ -11,7 +11,7 @@ server-id: ""
 host-label: ""
 
 messages:
-  prefix: "&7"
+  prefix: ""
   ping-line: "&7Ping: &f{ping}ms"
   server-line: "&7Server: &f{tps} TPS &8· &f{mspt} MSPT &8· &f{online}/{max} &8· &7heap &f{heap}%"
   disabled: "&cRoot-Ping is disabled."
