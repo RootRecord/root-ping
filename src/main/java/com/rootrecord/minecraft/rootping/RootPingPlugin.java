@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -144,13 +143,9 @@ public final class RootPingPlugin extends JavaPlugin {
      * Ensure bare /ping (and /latency) dispatch to this plugin even when another plugin
      * declared the same label earlier with a null executor.
      */
-    @SuppressWarnings("unchecked")
     private void claimPrimaryLabels(PluginCommand cmd, String... labels) {
         try {
-            var map = getServer().getCommandMap();
-            Field field = map.getClass().getDeclaredField("knownCommands");
-            field.setAccessible(true);
-            Map<String, Command> known = (Map<String, Command>) field.get(map);
+            Map<String, Command> known = getServer().getCommandMap().getKnownCommands();
             for (String label : labels) {
                 if (label == null || label.isBlank()) {
                     continue;
@@ -164,7 +159,7 @@ public final class RootPingPlugin extends JavaPlugin {
                     getLogger().info("Claimed /" + key + " (was owned by " + owner + ").");
                 }
             }
-        } catch (ReflectiveOperationException ex) {
+        } catch (Exception ex) {
             getLogger().warning("Could not claim /ping primary labels: " + ex.getMessage());
         }
     }
